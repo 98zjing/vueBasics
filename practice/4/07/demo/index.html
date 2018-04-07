@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<input-number :max='100' :min='1' :value='val' :step='true' :num='20' @change></input-number>
+	</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="components/input-number.js"></script>
+<script>
+
+	const VUE = new Vue({
+		el:'#app',
+		data:{
+			val:1
+		},
+		components:{
+			'input-number':inputNumber
+		},
+		mounted:function(){
+			/*监听run的on-change事件*/
+				run.$on('on-change',function(val){
+					console.log(val);
+			});
+		}
+	});
+</script>
+</html>

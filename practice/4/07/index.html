@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<child-component :vals='val'></child-component>
+		<button @click='dump'>parent</button>
+	</div>
+</body>
+<!-- 父组件的数据如果为一个对象或者数组，那么在子组件操作数据是为影响到父组件的数据的，解决方案数据克隆 -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+	let childComponent = {
+		props:['vals'],
+		data:function(){
+			return{
+				val:this.vals
+			}
+		},
+		methods:{
+			dump:function(){
+				alert(this.vals);
+			},
+			switchs:function(){
+				this.val.push(1)
+				alert(this.val);
+			}
+		},
+		template:"\
+			<div>\
+				<button @click='dump'>DUMP</button>\
+				<button @click='switchs'>SWITCH</button>\
+			</div>\
+		",
+	};
+	const VUE = new Vue({
+		el:'#app',
+		data:{
+			val:[5]
+		},
+		components:{
+			'child-component':childComponent
+		},
+		methods:{
+			dump:function(){
+				alert(this.val);
+			}
+		}
+	});
+</script>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active{
+            background-color: red;
+            font-family: "Arial", sans-serif;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <template v-for="(val,index) in arr">
+                <li :class="val.isStyle " >{{index + 1}}  {{val.name}}</li>
+                <button @click="tab(index)">{{val.name}}</button>
+            </template>
+        </ul>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+    const VUE = new Vue({
+            el:"#app",
+            data:{
+                arr:[
+                    {name:'姚茂林',age:20,major:'web前端',isStyle:'active'},
+                    {name:'黄瑞',age:20,major:'web前端',isStyle:true},
+                    {name:'曾静',age:20,major:'web前端',isStyle:true}
+                ]
+            },
+            methods:{
+                tab:function (index){
+                    this.arr[index].isStyle = (this.arr[index].isStyle == 'active') ? ' ' : 'active';
+                }
+            }
+    });
+</script>
+</html>

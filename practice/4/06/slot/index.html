@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<child-name>
+			<template slot='name' scope='props'>
+				<!--这里的props的数据只有在 slot中绑定的数据不包括data中的数据 -->
+				<li>{{props.names.name}}</li>
+			</template>
+		</child-name>
+	</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+	let childName = {
+		data:function(){
+			return {
+				names:[
+					{name:"sss"},
+					{name:'ddd'},
+					{name:"wwww"}
+				],
+				p:'我是子组件的p'
+			}
+		},
+		template:"\
+			<ul>\
+				<slot name='name' v-for='(val,index) in names' :names='val'>\
+					<p>我是默认的数据{{val.name}}</p>\
+				</slot>\
+			</ul>\
+		",
+	};
+	let app = new Vue({
+		el:'#app',
+		data:{
+			name:"我是父组件的name"
+		},
+		components:{
+				'child-name':childName
+		}
+	});
+</script>
+</html>

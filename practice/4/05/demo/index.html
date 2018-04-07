@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="asset/css/style.css">
+</head>
+<body>
+	<div id="app" v-cloak>
+		<template v-if='list.length' >
+			<table>
+				<thead>
+					<tr>
+						<th></th>
+						<th>商品名称</th>
+						<th>商品价格</th>
+						<th>数量</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for='(val,index) in list'>
+						<td>{{index + 1}}</td>
+						<td>{{val.name}}</td>
+						<td>
+							{{val.price}}
+						</td>
+						<td>
+							<button @click='reduce(index)'>-</button>
+							{{val.counts}}
+							<button @click='add(index)'>+</button>
+						</td>
+						<td><button @click='remove(index)'>删除</button></td>
+					</tr>
+				</tbody>
+			</table>
+			<div>总价格：{{totbalPrice}}</div>
+		</template>
+		<div v-else>购物车为空</div>
+	</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="asset/js/index.js"></script>
+</html>
