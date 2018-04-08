@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+	<div id="app" v-cloak>
+		<tabs v-model='activeKey'>
+			<pane label='标签1' name='1'>
+				标签1的内容
+			</pane>
+			<pane label='标签2' name='2'>
+				标签2的内容
+			</pane>
+			<pane label='标签3' name='3'>
+				标签3的内容
+			</pane>
+		</tabs>		
+	</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="components/pane.js"></script>
+<script src="components/tabs.js"></script>
+<script>
+	let app = new Vue({
+		el:'#app',
+		name:'app',
+		data:{
+			activeKey:2
+		},
+		components:{
+			'tabs':tabs,
+			'pane':pane
+		},
+		mounted:function(){
+			run.$on('on-click',function(val){
+			});
+		}
+	});
+</script>
+</html>
