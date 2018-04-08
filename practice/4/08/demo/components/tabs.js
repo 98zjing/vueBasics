@@ -2,8 +2,9 @@ let tabs = {
 	template:"\
 		<div class='tabs'>\
 			<div class='tabs-bar'>\
-				<div :class='tabCls(item)'\
+				<div \
 					v-for='(item,index) in navList'\
+					:class='tabCls(item)'\
 					@click='handleChange(index)'>\
 					{{item.label}}\
 				</div>\
@@ -37,7 +38,7 @@ let tabs = {
 			return [
 				'tabs-tab',
 				{
-					'tabs-tab-active':item.name === this.currentVal
+					'tabs-tab-active':item.name == this.currentVal
 				}
 			]
 		},
