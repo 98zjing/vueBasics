@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<input-number :defaultVal='defaultVal' max='20' min='1' isDefaults num='10'></input-number>
+	</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="component/input-number.js"></script>
+<script>
+	let app = new Vue({
+		el:'#app',
+		data:{
+			defaultVal:1,
+		},
+		components:{
+			'input-number':inputNumber,
+		}
+	});
+</script>
+</html>
