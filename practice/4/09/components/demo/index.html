@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="app">
+    <div class="main-input">
+        <template v-if="compoentsName == 'input-radio' ">
+            <input-radio :vals="radioData.vals" :name="radioData.name" :index="radioData.defaultIndex"></input-radio>
+            <button class="input-left">下一步</button>
+            <button @click="radioReset" class="input-right">重置</button>
+        </template>
+        <template v-if="compoentsName == 'input-checkbox'">
+            <input-checkbox :vals="checkboxData.valNames" :value="checkboxData.value"></input-checkbox>
+        </template>
+        <template v-if="compoentsName == 'input-textarea'">
+            <input-textarea></input-textarea>
+        </template>
+    </div>
+    <div class="main-footer">
+
+    </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="componetns/run.js"></script>
+<script src="componetns/input-radio.js"></script>
+<script src="componetns/input-checkbox.js"></script>
+<script src="componetns/input-textarea.js"></script>
+<script>
+let app = new Vue({
+        el:'#app',
+        data:{
+            radioData:{
+                vals:['男','女','保密'],
+                name:'inpu-radio',
+                defaultIndex:1,
+                value:'女',
+            },
+            checkboxData:{
+                valNames:[
+                    '看书',
+                    '游泳',
+                    '跑步',
+                    '看电影',
+                    '听音乐'
+                ],
+                name:'input-checkbox',
+                default:'看书',
+                value:'看书'
+            },
+            compoentsName:'input-radio'
+        },
+        components:{
+            'input-radio':inputRadio,
+            'input-checkbox':inputCheckbox,
+            'input-textarea':inputTextarea
+        },
+        methods:{
+            radioReset:function () {
+                run.$emit('on-input-radio-reset','女');
+            }
+        },
+        mounted:function () {
+            run.$on('on-input-radio',(val) => {
+                    this.radioData.value = val;
+            });
+        }
+    });
+</script>
+</html>
