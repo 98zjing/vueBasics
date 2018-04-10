@@ -9,18 +9,24 @@
 <div id="app">
     <div class="main-input">
         <template v-if="compoentsName == 'input-radio' ">
-            <input-radio :vals="radioData.vals" :name="radioData.name" :index="radioData.defaultIndex"></input-radio>
+            <input-radio :vals="radioData.vals" :name="radioData.name" :index="radioData.defaultIndex">
+                <p>1:请问您的性别是：</p>
+            </input-radio>
             <button class="input-left"  @click="compoentsName = 'input-checkbox'">下一步</button>
             <button @click="radioReset" class="input-right">重置</button>
         </template>
         <template v-if="compoentsName == 'input-checkbox'">
-            <input-checkbox :vals="checkboxData.valNames" :value="checkboxData.value"></input-checkbox>
+            <input-checkbox :vals="checkboxData.valNames" :value="checkboxData.value">
+                <p>2:请选择您的兴趣爱好：</p>
+            </input-checkbox>
             <button class="input-left" @click="compoentsName ='input-textarea'">下一步</button>
             <button class="input-center"  @click="compoentsName = 'input-radio'">上一步</button>
             <button @click="checkboxRest" class="input-right">重置</button>
         </template>
         <template v-if="compoentsName == 'input-textarea'">
-            <input-textarea></input-textarea>
+            <input-textarea>
+                <p>3：请接受一下自己：</p>
+            </input-textarea>
             <button class="input-left">提交</button>
             <button class="input-center"  @click="compoentsName = 'input-checkbox'">上一步</button>
             <button @click="textareaRest" class="input-right">重置</button>
@@ -59,6 +65,10 @@ let app = new Vue({
                 defaultVal:'看书',
                 value:'看书'
             },
+            textraeaData:{
+                html:'不少于100字',
+                defaultHtml:'不少于100字'
+            },
             compoentsName:'input-radio'
         },
         components:{
@@ -74,15 +84,18 @@ let app = new Vue({
                 run.$emit('on-input-checkbox-reset',this.checkboxData.defaultVal);
             },
             textareaRest:function(){
-                run.$emit('on-input-textarea-reset',this.checkboxData.defaultVal);
+                run.$emit('on-input-textarea-reset',this.textraeaData.defaultHtml);
             },
         },
         mounted:function () {
             run.$on('on-input-radio',(val) => {
                     this.radioData.value = val;
             });
-            run.$on('on-iinput-checkbox',(val) =>{
+            run.$on('on-input-checkbox',(val) =>{
                 this.checkboxData.value = val;
+            });
+            run.$on('on-input-textraea',(val) =>{
+                this.textraeaData.html = val;
             });
         }
     });

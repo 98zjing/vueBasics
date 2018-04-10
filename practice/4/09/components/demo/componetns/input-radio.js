@@ -7,6 +7,11 @@
 let inputRadio = {
     template:"\
         <div class='input-radio'>\
+            <slot>\
+                <p>\
+                    这是您的描述！\
+                </p>\
+            </slot>\
              <template \
                 v-for='(val,index) in currentVals' \
                 v-model='currenVal'>\

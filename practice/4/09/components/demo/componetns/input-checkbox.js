@@ -7,6 +7,11 @@
 let inputCheckbox  = {
     template:"\
         <div class='input-checkbox'>\
+            <slot>\
+                <p>\
+                    这是您的描述！\
+                </p>\
+            </slot>\
             <template v-for='(val,index) in currentVals'>\
                 <input type='checkbox' v-model='currentVal' :value='val' :name='currenName'>\
                 <span>{{val}}</span>\
