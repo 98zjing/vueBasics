@@ -48,12 +48,12 @@ let inputCheckbox  = {
         }
     },
     methods:{
-        
+
     },
-    mounetd:function () {
+    mounted:function () {
         /*外部默认数据重置接口*/
-        run.$on("on-input-checkbox-reset",()=>{
-            this.currentVal = val;
+        run.$on("on-input-checkbox-reset",(val)=>{
+            this.currentVal = [val];
         });
     }
 };

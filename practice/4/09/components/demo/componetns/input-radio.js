@@ -50,7 +50,7 @@ let inputRadio = {
             
         }
     },
-mounted:function(){
+    mounted:function(){
         run.$emit('on-input-radio',this.currenVal);
         /*用于外部接口数据重置*/
         run.$on('on-input-radio-reset',(val)=> {

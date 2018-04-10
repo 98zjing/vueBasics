@@ -4,4 +4,19 @@
  *Telephone：******
  *github:https://github.com/98zjing
  */
-let inputTextarea = {};
+let inputTextarea = {
+    template:"\
+    ",
+    props:{
+
+    },
+    watch:{
+
+    },
+    methods:{
+
+    },
+    mounted:function(){
+
+    }
+};

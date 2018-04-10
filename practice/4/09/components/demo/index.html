@@ -10,14 +10,20 @@
     <div class="main-input">
         <template v-if="compoentsName == 'input-radio' ">
             <input-radio :vals="radioData.vals" :name="radioData.name" :index="radioData.defaultIndex"></input-radio>
-            <button class="input-left">下一步</button>
+            <button class="input-left"  @click="compoentsName = 'input-checkbox'">下一步</button>
             <button @click="radioReset" class="input-right">重置</button>
         </template>
         <template v-if="compoentsName == 'input-checkbox'">
             <input-checkbox :vals="checkboxData.valNames" :value="checkboxData.value"></input-checkbox>
+            <button class="input-left" @click="compoentsName ='input-textarea'">下一步</button>
+            <button class="input-center"  @click="compoentsName = 'input-radio'">上一步</button>
+            <button @click="checkboxRest" class="input-right">重置</button>
         </template>
         <template v-if="compoentsName == 'input-textarea'">
             <input-textarea></input-textarea>
+            <button class="input-left">提交</button>
+            <button class="input-center"  @click="compoentsName = 'input-checkbox'">上一步</button>
+            <button @click="textareaRest" class="input-right">重置</button>
         </template>
     </div>
     <div class="main-footer">
@@ -38,7 +44,7 @@ let app = new Vue({
             radioData:{
                 vals:['男','女','保密'],
                 name:'inpu-radio',
-                defaultIndex:1,
+                defaultVal:'女',
                 value:'女',
             },
             checkboxData:{
@@ -50,7 +56,7 @@ let app = new Vue({
                     '听音乐'
                 ],
                 name:'input-checkbox',
-                default:'看书',
+                defaultVal:'看书',
                 value:'看书'
             },
             compoentsName:'input-radio'
@@ -62,12 +68,21 @@ let app = new Vue({
         },
         methods:{
             radioReset:function () {
-                run.$emit('on-input-radio-reset','女');
-            }
+                run.$emit('on-input-radio-reset',this.radioData.defaultVal);
+            },
+            checkboxRest:function(){
+                run.$emit('on-input-checkbox-reset',this.checkboxData.defaultVal);
+            },
+            textareaRest:function(){
+                run.$emit('on-input-textarea-reset',this.checkboxData.defaultVal);
+            },
         },
         mounted:function () {
             run.$on('on-input-radio',(val) => {
                     this.radioData.value = val;
+            });
+            run.$on('on-iinput-checkbox',(val) =>{
+                this.checkboxData.value = val;
             });
         }
     });
