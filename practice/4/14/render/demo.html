@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="" id="app">
+    <v-div-p>
+    </v-div-p>
+
+
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+    let vP = {
+        data:function () {
+            return {
+                html:'p'
+            }
+        },
+        render:function (h) {
+            return h('div',[this.$scopedSlots.default({
+                    text:this.html,
+                    html:'7878787'
+                }),
+                this.$scopedSlots.ss()
+            ]);
+        }
+    };
+    let vDviP = {
+        data:function () {
+            return {
+                htmL:'html....'
+            }
+        },
+        render:function (h) {
+            return h('div', [
+                h(vP, {
+                    scopedSlots: {
+                        default: function (props) {
+                            return h('span', [props.html,props.text])
+                        },
+                        ss:function () {
+                            return h('p','111111');
+                        }
+                    }
+                })
+            ])
+        }
+    };
+    var app=new Vue({
+        el:'#app',
+        components:{
+            'v-div-p':vDviP
+        }
+    })
+</script>
+</html>

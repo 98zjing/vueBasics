@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <v-scoped-slots></v-scoped-slots>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script>
+    let vP = {
+        props:{
+            html:{
+                type:String,
+                default:'传入的数据！'
+            }
+        },
+        data:function () {
+            return{
+                current:this.html
+            }
+        },
+        render:function (h) {
+            /*作用域插槽的创建于数据的传入*/
+            return h('slot',[
+                /*这里有数据传入数据*/
+                this.$scopedSlots.span({
+                    html:this.current
+            }),
+                /*这里没有传入数据*/
+                this.$scopedSlots.span()
+            ]);
+        }
+    };
+    let vScopedSlots = {
+        props:{},
+        data:function () {
+            return {
+                html:'没有数据传入'
+            }
+        },
+        render:function (h) {
+            let _th = this;
+            return h(vP,{
+                scopedSlots:{
+                    span:function (props) {
+                        if(props)
+                            return h('span',props.html)
+                        return h('p',_th.html)
+                    }
+                }
+            })
+            
+        }
+    }
+    let app = new Vue({
+        el:'#app',
+        data:{},
+        watch:{},
+        components:{
+            'v-scoped-slots':vScopedSlots
+        }
+    });
+</script>
+</html>
