@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="assets/css/stype.css">
+</head>
+<body>
+    <div id="app">
+        <v-table :columns="columns" :data="data"></v-table>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="components/table.js"></script>
+<script>
+    const APP = new Vue({
+        el:'#app',
+        data:{
+            columns:[
+                {
+                    title:'姓名',
+                    key:'name'
+                },
+                {
+                    title:'年龄',
+                    key:'age',
+                    isSort:true
+                },
+                {
+                    title:'出生日期',
+                    key:'birthday',
+                    isSort:true
+                },
+                {
+                    title:'地址',
+                    key:'address'
+                }
+            ],
+            data:[
+                {
+                    name:'王小明',
+                    age:28,
+                    birthday:'1998-01-25',
+                    address:'恩施'
+                },
+                {
+                    name:'王小明',
+                    age:28,
+                    birthday:'1989-01-25',
+                    address:'恩施'
+                },
+                {
+                    name:'王小明',
+                    age:28,
+                    birthday:'1997-01-25',
+                    address:'恩施'
+                },
+                {
+                    name:'王9明',
+                    age:48,
+                    birthday:'1994-01-25',
+                    address:'恩施'
+                },
+                {
+                    name:'王4明',
+                    age:8,
+                    birthday:'1998-01-25',
+                    address:'恩施'
+                },
+                {
+                    name:'王2明',
+                    age:30,
+                    birthday:'1998-01-25',
+                    address:'恩施'
+                }
+            ]
+        },
+        methods:{
+
+        },
+        components:{
+            'v-table':vTable
+        },
+        mounted:function(){
+
+        }
+    });
+</script>
+</html>
