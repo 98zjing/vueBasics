@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="message">
+            <v-input v-model="username"></v-input>
+            <v-textarea v-model="message" ref="message"></v-textarea>
+            <button @click="handelSend">发布</button>
+        </div>
+        <v-list :list="list" @reply="handelReply"></v-list>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="components/vInput.js"></script>
+<script src="components/vList.js"></script>
+<script src="components/vTextarea.js"></script>
+<script>
+    const APP = new Vue({
+        el:'#app',
+        data:{
+            username:'',
+            message:'',
+            list:[]
+        },
+        methods:{
+            handelSend:function () {
+                if(this.username === ''){
+                    alert('请输入您的昵称！');
+                    return;
+                }
+                if(this.message == ''){
+                    alert('请输入您的留言内容！');
+                    return;
+                }
+                this.list.push({
+                    name:this.username,
+                    message:this.message
+                });
+                this.message = '';
+            },
+            handelReply:function (index) {
+                let _name = this.list[index].name;
+                this.message = "回复@：" + _name + ": ";
+                this.$refs.message.focus();
+            }
+        },
+        components:{
+            'v-input':vInput,
+            'v-list':vList,
+            'v-textarea':vTextarea
+        },
+        mounted:function(){
+
+        }
+    });
+</script>
+</html>
